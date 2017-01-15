@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "compile": "tsc --watch",
-    "serve": "nodemon dist/server.js  --watch dist"
+    "serve": "node_modules/.bin/nodemon dist/server.js  --watch dist"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/outbrain/donatello#readme",
   "devDependencies": {
     "@types/express": "^4.0.34",
+    "nodemon": "^1.11.0",
     "tslint": "^4.3.1",
     "typescript": "^2.1.5"
   },
