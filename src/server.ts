@@ -1,8 +1,6 @@
 import * as express from 'express';
 import {Routes} from './routes/routes';
 
-
-
 class Server {
   readonly router = new Routes();
   readonly app: express.Application = express();
