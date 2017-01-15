@@ -3,3 +3,6 @@
 
 # node
 node_modules
+*.map
+*.js
+npm-debug.log
