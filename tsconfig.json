@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "outDir": "dist",
     "module": "commonjs",
     "declaration": true,
     "noImplicitAny": true,
@@ -13,6 +12,6 @@
     "noUnusedLocals": true
   },
   "files": [
-    "src/bootstrap.ts"
+    "src/server.ts"
   ]
 }

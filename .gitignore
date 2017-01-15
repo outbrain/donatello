@@ -5,4 +5,5 @@
 node_modules
 *.map
 *.js
+*.d.ts
 npm-debug.log
