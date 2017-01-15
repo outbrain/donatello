@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
-    "serve": "tsc --watch"
+    "serve": "tsc --watch",
+    "watch": "forever ./src/server.js --watch --watchDirectory ./src --watchIgnore *.ts *.map"
   },
   "repository": {
     "type": "git",
