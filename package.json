@@ -4,10 +4,9 @@
   "description": "Mock server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'",
     "compile": "tsc --watch",
-    "watch": "forever ./src/server.js --watch --watchDirectory ./dist"
+    "serve": "nodemon dist/server.js  --watch dist"
   },
   "repository": {
     "type": "git",
