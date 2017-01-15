@@ -6,6 +6,4 @@ node_modules
 npm-debug.log
 
 #src
-*.map
-*.js
-*.d.ts
+dist/
