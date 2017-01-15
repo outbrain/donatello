@@ -19,9 +19,7 @@ export class Routes {
     app.route('/api/ports/:id')
       .put((req, res) => {
 		    res.status(200).send();
-      });
-
-    app.route('/api/ports/:id')
+      })
       .delete((req, res) => {
 		    res.status(200).send();
       });
@@ -35,19 +33,13 @@ export class Routes {
     app.route('/api/ports/:portId/routes/:id')
       .post((req, res) => {
 		    res.status(200).send();
-      });
-
-    app.route('/api/ports/:portId/routes/:id')
+      })
       .put((req, res) => {
 		    res.status(200).send();
-      });
-
-    app.route('/api/ports/:portId/routes/:id')
+      })
       .delete((req, res) => {
 		    res.status(200).send();
-      });
-
-    app.route('/api/ports/:portId/routes/:id')
+      })
       .get((req, res) => {
 		    res.status(200).send();
       });
@@ -56,19 +48,13 @@ export class Routes {
     app.route('/api/ports/:portId/routes/:routeId/responses/:id')
       .post((req, res) => {
 		    res.status(200).send();
-      });
-
-    app.route('/api/ports/:portId/routes/:routeId/responses/:id')
+      })
       .put((req, res) => {
 		    res.status(200).send();
-      });
-
-    app.route('/api/ports/:portId/routes/:routeId/responses/:id')
+      })
       .delete((req, res) => {
 		    res.status(200).send();
-      });
-
-    app.route('/api/ports/:portId/routes/:routeId/responses/:id')
+      })
       .get((req, res) => {
 		    res.status(200).send();
       });
