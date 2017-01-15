@@ -1,4 +1,4 @@
-import {IResponse} from '../response/response.model'
+import {IResponse} from './response.model';
 
 export interface IRoute {
   id: string;

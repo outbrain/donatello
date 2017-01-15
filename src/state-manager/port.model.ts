@@ -1,9 +1,9 @@
-import {IRoute} from '../route/route.model'
+import {IRoute} from './route.model';
 
-export interface IPort{
+export interface IPort {
   id: string;
   number: number;
-  name: string;   
+  name: string;
   active: boolean;
   proxy: any;
   routes: IRoute[];

@@ -1,8 +1,8 @@
 export interface IResponse {
-  id: string; 
+  id: string;
   name: string;
   status: number;
   delay: number;
-  active: true;               
+  active: boolean;
   data: any;
 }
