@@ -1,0 +1,23 @@
+{
+  "name": "donatello",
+  "version": "0.0.0",
+  "description": "Mock server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/outbrain/donatello.git"
+  },
+  "author": "outbrain/engage",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/outbrain/donatello/issues"
+  },
+  "homepage": "https://github.com/outbrain/donatello#readme",
+  "devDependencies": {
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.5"
+  }
+}
