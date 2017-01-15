@@ -11,7 +11,7 @@ export class Routes {
       });
 
     //Ports API
-    app.route('/api/ports')
+    app.route('/api/ports/')
       .post((req, res) => {
         res.status(200).send();
       });
