@@ -2,29 +2,31 @@ import {StateManager} from '../../state-manager/state-manager';
 import {ActivityManager} from '../../activity-manager/activity-manager';
 import {IRoute} from '../../state-manager/route.model';
 import {IResponse} from '../../state-manager/response.model';
+import {ResponseService} from '../response/response-service';
 
-class routeService {
+export class RouteService {
   readonly activityManager = ActivityManager.getInstance();
   readonly stateManager = StateManager.getInstance();
+  readonly responseService = new ResponseService();
+  
 
-  create(route: IRoute) {
-    this.activityManager.stopActivities();
-    this.stateManager.addRoute(route);
-    route.responses.forEach((response :IResponse) => {
-      this.stateManager.addResponse(respone);
+  create(portId, route: IRoute) {
+    this.stateManager.addRoute(portId, route);
+    route.responses.forEach((response) => {
+      this.responseService.create(portId, route.id, response);
     });
     this.activityManager.startActivities();
   }
 
   update(route: IRoute) {
     this.activityManager.stopActivities();
-    this.stateManager.updateRoute(route);
+    //this.stateManager.updateRoute(route);
     this.activityManager.startActivities();
   }
 
   remove(routeId: string) {
     this.activityManager.stopActivities();
-    this.stateManager.removeRoute(routeId);
+    //this.stateManager.removeRoute(routeId);
     this.activityManager.startActivities();
   }
 }

@@ -1,7 +1,7 @@
 import * as express from 'express';
+import {Response, Request} from 'express';
 import {StateManager} from '../state-manager/state-manager';
 import {PortsService} from '../services/port/ports-service';
-import {Request, Response} from 'express';
 
 export class Routes {
   readonly stateManager = StateManager.getInstance();
@@ -17,45 +17,45 @@ export class Routes {
       });
 
     app.route('/api/ports/:id')
-      .put((req, res) => {
+      .put((req: Request, res: Response) => {
         res.status(200).send();
       })
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         res.status(200).send();
       });
 
     app.route('/api/ports:id?')
-      .get((req, res) => {
+      .get((req: Request, res: Response) => {
         res.status(200).send();
       });
 
     // Route API
     app.route('/api/ports/:portId/routes/:id')
-      .post((req, res) => {
+      .post((req: Request, res: Response) => {
         res.status(200).send();
       })
-      .put((req, res) => {
+      .put((req: Request, res: Response) => {
         res.status(200).send();
       })
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         res.status(200).send();
       })
-      .get((req, res) => {
+      .get((req: Request, res: Response) => {
         res.status(200).send();
       });
 
     // Response API
     app.route('/api/ports/:portId/routes/:routeId/responses/:id')
-      .post((req, res) => {
+      .post((req: Request, res: Response) => {
         res.status(200).send();
       })
-      .put((req, res) => {
+      .put((req: Request, res: Response) => {
         res.status(200).send();
       })
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         res.status(200).send();
       })
-      .get((req, res) => {
+      .get((req: Request, res: Response) => {
         res.status(200).send();
       });
   }

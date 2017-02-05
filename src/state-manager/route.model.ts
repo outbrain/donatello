@@ -5,5 +5,5 @@ export interface IRoute {
   path: RegExp;
   method: 'POST' | 'GET' | 'DELETE' | 'PUT';
   active: boolean;
-  responses: IResponse[];
+  responses?: IResponse[];
 }
