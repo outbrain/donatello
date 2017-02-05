@@ -10,7 +10,7 @@ export class RouteService {
   readonly responseService = new ResponseService();
   
 
-  create(portId, route: IRoute) {
+  create(portId: string, route: IRoute) {
     this.stateManager.addRoute(portId, route);
     route.responses.forEach((response) => {
       this.responseService.create(portId, route.id, response);

@@ -67,7 +67,7 @@ export class StateManager {
     return this.getPort(portId).routes.filter((route) => route.id === routeId)[0];
   }
 
-  getResponse(portId: string, routeId: string, responseId): IResponse | undefined {
+  getResponse(portId: string, routeId: string, responseId: string): IResponse | undefined {
     return this.getRoute(portId, routeId).responses.filter((response) => response.id === responseId)[0];
   }
 }

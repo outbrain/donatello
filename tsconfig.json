@@ -4,12 +4,10 @@
     "module": "commonjs",
     "declaration": true,
     "noImplicitAny": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "moduleResolution": "node",
     "sourceMap": true,
     "inlineSources": true,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
     "outDir": "dist"
   },
   "files": [

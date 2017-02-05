@@ -37,7 +37,7 @@ export class ActivityManager {
     return app;
   }
 
-  private handleResponse(responses: IResponse[], proxy, req: Request, res: Response) {
+  private handleResponse(responses: IResponse[], proxy: any, req: Request, res: Response) {
     const activeResponse = responses.filter(item => item.active)[0];
     res.send(activeResponse.data);
   }
