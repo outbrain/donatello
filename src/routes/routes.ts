@@ -14,7 +14,7 @@ export class Routes {
     // Ports API
     app.route('/api/ports/')
       .post((req: Request, res: Response) => {
-        this.portsService.create(req.body);
+        this.portsService.create(req.body.port);
         res.status(200).send();
       });
 

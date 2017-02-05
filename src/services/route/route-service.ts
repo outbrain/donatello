@@ -15,7 +15,6 @@ export class RouteService {
     route.responses.forEach((response) => {
       this.responseService.create(portId, route.id, response);
     });
-    this.activityManager.startActivities();
   }
 
   update(route: IRoute) {
