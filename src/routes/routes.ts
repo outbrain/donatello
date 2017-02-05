@@ -5,16 +5,11 @@ export class Routes {
   readonly stateManager = StateManager.getInstance();
 
   public init(app: express.Application) {
-    app.route('/')
-      .get((req, res) => {
-        res.render('login', {
-          title: 'Express Login'
-        });
-      });
 
     // Ports API
     app.route('/api/ports/')
       .post((req, res) => {
+
         res.status(200).send();
       });
 
