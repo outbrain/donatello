@@ -1,6 +1,8 @@
 import * as express from 'express';
+import {StateManager} from '../state-manager/state-manager';
 
 export class Routes {
+  readonly stateManager = StateManager.getInstance();
 
   public init(app: express.Application) {
     app.route('/')

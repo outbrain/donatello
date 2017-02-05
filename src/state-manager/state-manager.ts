@@ -1,8 +1,7 @@
 export class StateManager {
-  private static
-  instance: StateManager;
+  private static instance: StateManager;
 
-  public static get Instance() {
+  public static getInstance() {
     return StateManager.instance || (StateManager.instance = new StateManager());
   }
 }
