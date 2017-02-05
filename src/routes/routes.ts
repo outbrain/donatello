@@ -1,14 +1,19 @@
 import * as express from 'express';
 import {StateManager} from '../state-manager/state-manager';
+import {IPort} from '../state-manager/port.model';
+import
+import {PortsService} from '../services/port/ports-service';
 
 export class Routes {
   readonly stateManager = StateManager.getInstance();
+  readonly portsService = new PortsService();
 
   public init(app: express.Application) {
 
     // Ports API
     app.route('/api/ports/')
       .post((req, res) => {
+        this.portsService.create(req: IPort);
         res.status(200).send();
       });
 

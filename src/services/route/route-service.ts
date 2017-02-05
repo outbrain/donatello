@@ -7,7 +7,7 @@ class routeService {
   readonly activityManager = ActivityManager.getInstance();
   readonly stateManager = StateManager.getInstance();
 
-  create(route :IRoute) {
+  create(route: IRoute) {
     this.activityManager.stopActivities();
     this.stateManager.addRoute(route);
     route.responses.forEach((response :IResponse) => {
@@ -16,13 +16,13 @@ class routeService {
     this.activityManager.startActivities();
   }
 
-  update(route :IRoute) {
+  update(route: IRoute) {
     this.activityManager.stopActivities();
     this.stateManager.updateRoute(route);
     this.activityManager.startActivities();
   }
 
-  remove(routeId :string) {
+  remove(routeId: string) {
     this.activityManager.stopActivities();
     this.stateManager.removeRoute(routeId);
     this.activityManager.startActivities();

@@ -3,9 +3,11 @@ import {StateManager} from '../../state-manager/state-manager';
 import {ActivityManager} from '../../activity-manager/activity-manager';
 import {IRoute} from '../../state-manager/route.model';
 
-class PortService {
+export class PortsService {
   readonly activityManager = ActivityManager.getInstance();
   readonly stateManager = StateManager.getInstance();
+
+  PortsService() {}
 
   create(port :IPort) {
     this.activityManager.stopActivities();
