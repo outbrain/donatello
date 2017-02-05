@@ -17,12 +17,13 @@ export class ActivityManager {
 
   startActivities() {
     const state = this.stateManager.getState();
+    console.log(state.ports);
     state.ports
       .filter(port => port.active)
       .forEach((port) => {
         const app = this.createListener(port);
         port.routes.forEach((route) => {
-          app[route.method.toLowerCase()].apply(null, this.handleResponse.bind(this, route.responses, port.proxy));
+          app[route.method.toLowerCase()].call(app, route.path, this.handleResponse.bind(this, route.responses, port.proxy));
         });
       })
   }
