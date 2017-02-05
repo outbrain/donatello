@@ -1,10 +1,9 @@
 import * as express from 'express';
 import {StateManager} from '../state-manager/state-manager';
 import {IResponse} from '../state-manager/response.model';
-import Request = express.Request;
-import Response = express.Response;
+import {Request, Response} from 'express';
 import {Server} from 'http';
-import {listeners} from 'cluster';
+
 import {IPort} from '../state-manager/port.model';
 
 export class ActivityManager {
