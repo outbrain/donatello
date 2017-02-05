@@ -1,3 +1,4 @@
+import * as express from 'express';
 import {StateManager} from '../state-manager/state-manager';
 
 export class ActivityManager {
@@ -8,11 +9,21 @@ export class ActivityManager {
     return ActivityManager.instance || (ActivityManager.instance = new ActivityManager());
   }
 
-  restart() {
-
+  startActivities() {
+    const state = this.stateManager.getState();
+    state.ports
+      .filter(port => port.active)
+      .forEach((port) => {
+        const app: express.Application = express();
+        app.listen(port.number, () => {
+          console.log(`start listening ${port.name} on ${port.number}`);
+        });
+        port.routes.forEach((route) => {
+        })
+      })
   }
 
-  foo() {
+  stopActivities() {
 
   }
 }

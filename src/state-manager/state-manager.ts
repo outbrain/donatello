@@ -1,5 +1,6 @@
 import {IState} from './state.model';
 import {IPort} from './port.model';
+
 export class StateManager {
   private static instance: StateManager;
   private readonly state: IState = {
@@ -18,5 +19,9 @@ export class StateManager {
       active: port.active,
       proxy: port.proxy
     });
+  }
+
+  getState(): IState {
+    return this.state;
   }
 }
