@@ -21,14 +21,14 @@ export class ActivityManager {
     state.ports
       .filter(port => port.active)
       .forEach((port) => {
-        const app = this.createListner(port);
+        const app = this.createListener(port);
         port.routes.forEach((route) => {
           app[route.method.toLowerCase()].apply(null, this.handleResponse.bind(this, route.responses, port.proxy));
         });
       })
   }
 
-  private createListner(port: IPort): express.Application {
+  private createListener(port: IPort): express.Application {
     const app: express.Application = express();
     const listener = app.listen(port.number, () => {
       console.log(`start listening ${port.name} on ${port.number}`);

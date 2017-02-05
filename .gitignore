@@ -3,7 +3,7 @@
 
 # node
 node_modules
-npm-debug.log
+npm-debug.log*
 
 #src
 dist/
