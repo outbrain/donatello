@@ -1,9 +1,8 @@
 import * as express from 'express';
+import {Request, Response} from 'express';
 import {StateManager} from '../state-manager/state-manager';
 import {IResponse} from '../state-manager/response.model';
-import {Request, Response} from 'express';
 import {Server} from 'http';
-
 import {IPort} from '../state-manager/port.model';
 
 export class ActivityManager {
@@ -23,7 +22,9 @@ export class ActivityManager {
       .forEach((port) => {
         const app = this.createListener(port);
         port.routes.forEach((route) => {
-          app[route.method.toLowerCase()].call(app, route.path, this.handleResponse.bind(this, route.responses, port.proxy));
+          (<any>app)[route.method.toLowerCase()]('route.path', (req: Request, res: Response) => {
+            this.handleResponse(route.responses, port.proxy, req, res);
+          });
         });
       })
   }
