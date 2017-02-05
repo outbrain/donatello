@@ -1,5 +1,5 @@
 import {IPort} from './port.model';
 
-export interface state {
+export interface IState {
   ports: IPort[];
 }

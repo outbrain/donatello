@@ -6,5 +6,5 @@ export interface IPort {
   name: string;
   active: boolean;
   proxy: any;
-  routes: IRoute[];
+  routes?: IRoute[];
 }   
