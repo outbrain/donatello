@@ -1,15 +1,21 @@
 import * as express from 'express';
 import {Response, Request} from 'express';
-import {StateManager} from '../state-manager/state-manager';
 import {PortsService} from '../services/port/ports-service';
 import * as bodyParser from 'body-parser';
+import {StateService} from '../services/state/state-service';
 
 export class Routes {
-  readonly stateManager = StateManager.getInstance();
   readonly portsService = new PortsService();
+  readonly stateService = new StateService();
 
   public init(app: express.Application) {
     app.use(bodyParser.json());
+
+    app.route('/api/state/')
+      .get((req: Request, res: Response) => {
+        const state = this.stateService.get();
+        res.status(200).send(state);
+      });
 
     // Ports API
     app.route('/api/ports/')

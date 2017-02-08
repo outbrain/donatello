@@ -39,8 +39,8 @@ export class ActivityManager {
   }
 
   private handleResponse(responses: IResponse[], proxy: any, req: Request, res: Response) {
-    const activeResponse = responses.filter(item => item.active)[0];
-    res.send(activeResponse.data);
+    const activeResponse = responses.find(item => item.active);
+    res.status(activeResponse.status).send(activeResponse.data);
   }
 
   stopActivities() {

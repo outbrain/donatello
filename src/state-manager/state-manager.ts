@@ -60,14 +60,10 @@ export class StateManager {
   }
 
   getPort(id: string): IPort {
-    return this.state.ports.filter((port) => port.id === id)[0];
+    return this.state.ports.find((port) => port.id === id);
   }
 
   getRoute(portId: string, routeId: string): IRoute {
-    return this.getPort(portId).routes.filter((route) => route.id === routeId)[0];
-  }
-
-  getResponse(portId: string, routeId: string, responseId: string): IResponse | undefined {
-    return this.getRoute(portId, routeId).responses.filter((response) => response.id === responseId)[0];
+    return this.getPort(portId).routes.find((route) => route.id === routeId);
   }
 }
