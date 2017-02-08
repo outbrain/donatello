@@ -5,6 +5,10 @@ export interface IPort {
   number: number;
   name: string;
   active: boolean;
-  proxy: any;
+  proxy?: IProxy;
   routes?: IRoute[];
-}   
+}
+
+export interface IProxy {
+  url: string;
+}

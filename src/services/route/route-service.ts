@@ -8,7 +8,6 @@ export class RouteService {
   readonly activityManager = ActivityManager.getInstance();
   readonly stateManager = StateManager.getInstance();
   readonly responseService = new ResponseService();
-  
 
   create(portId: string, route: IRoute) {
     this.stateManager.addRoute(portId, route);
