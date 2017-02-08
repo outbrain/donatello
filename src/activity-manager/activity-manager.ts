@@ -23,7 +23,7 @@ export class ActivityManager {
         const app = this.createListener(port);
         port.routes.forEach((route) => {
           (<any>app)[route.method.toLowerCase()](route.path, (req: Request, res: Response) => {
-            this.handleResponse(route.responses, port.proxy, req, res);
+            this.handleResponse(route.responses, req, res);
           });
         });
 
@@ -53,8 +53,10 @@ export class ActivityManager {
     return app;
   }
 
-  private handleResponse(responses: IResponse[], proxy: any, req: Request, res: Response) {
+  private handleResponse(responses: IResponse[], req: Request, res: Response) {
     const activeResponse = responses.find(item => item.active);
-    res.status(activeResponse.status).send(activeResponse.data);
+    setTimeout(() => {
+      res.status(activeResponse.status).send(activeResponse.data);
+    }, activeResponse.delay);
   }
 }

@@ -3,11 +3,20 @@ import {ActivityManager} from '../../activity-manager/activity-manager';
 import {IResponse} from '../../state-manager/response.model';
 
 export class ResponseService {
-  readonly activityManager = ActivityManager.getInstance();
-  readonly stateManager = StateManager.getInstance();
+  private readonly activityManager = ActivityManager.getInstance();
+  private readonly stateManager = StateManager.getInstance();
+  private readonly DEFAULT_RESPONSE = {
+    status: 200,
+    delay: 0,
+    active: false
+  };
 
   create(portId: string, routeId: string, response: IResponse) {
-    this.stateManager.addResponse(portId, routeId, response);
+    this.stateManager.addResponse(
+      portId,
+      routeId,
+      Object.assign({}, this.DEFAULT_RESPONSE, response)
+    );
   }
 
   update(response: IResponse) {
