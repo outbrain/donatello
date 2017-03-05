@@ -2,7 +2,11 @@ import * as express from 'express';
 import {Response, Request} from 'express';
 import * as bodyParser from 'body-parser';
 import {StateService} from '../services/state/state-service';
+<<<<<<< HEAD
 import {RouteService} from '../services/route/route-service';
+=======
+import {RouteService} from '../../dist/services/route/route-service';
+>>>>>>> bd0497a2c97d3307e6039bc2e3e0c4110c9d1011
 import {ResponseService} from '../services/response/response-service';
 import {PortsService} from '../services/port/ports-service';
 
@@ -32,8 +36,13 @@ export class Routes {
         const inputPort = req.body;
         this.portsService.create(inputPort, res);
         res.send();
+<<<<<<< HEAD
       });
 
+=======
+      })
+      
+>>>>>>> bd0497a2c97d3307e6039bc2e3e0c4110c9d1011
     app.route('/api/ports/:id')
       .get((req: Request, res: Response) => {
         const port = this.portsService.get(req.params.id);
