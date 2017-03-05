@@ -15,30 +15,16 @@ export class StateService {
   private readonly portService = new PortsService();
   private readonly routeService = new RouteService();
   private readonly responseService = new ResponseService();
-<<<<<<< HEAD
   private readonly logger: winston.Winston = winston;
-=======
-  private readonly logger: winston.Winston = winston; 
->>>>>>> bd0497a2c97d3307e6039bc2e3e0c4110c9d1011
   private readonly validationService = new ValidationService();
 
   getState(): IState {
     return this.stateManager.getState();
   }
-
-<<<<<<< HEAD
   // createPort(port: IPort, res: Response): void {
   //   this.activityManager.stopActivities();
   //   this.portService.create(port);
   //   this.activityManager.startActivities();
   //   res.status(200);
   // }
-=======
-  createPort(port: IPort, res: Response): void {
-    this.activityManager.stopActivities();
-    this.portService.create(port);
-    this.activityManager.startActivities();
-    res.status(200);
-  }
->>>>>>> bd0497a2c97d3307e6039bc2e3e0c4110c9d1011
 }
