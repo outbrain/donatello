@@ -20,15 +20,11 @@ export class ResponseService {
   }
 
   update(response: IResponse) {
-    this.activityManager.stopActivities();
     //this.stateManager.updateResponse(response);
-    this.activityManager.startActivities();
   }
 
   remove(responseId: string) {
-    this.activityManager.stopActivities();
     //this.stateManager.removeResponse(responseId);
-    this.activityManager.startActivities();
   }
 }
 

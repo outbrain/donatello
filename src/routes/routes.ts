@@ -1,12 +1,10 @@
 import * as express from 'express';
 import {Response, Request} from 'express';
-import {PortsService} from '../services/port/ports-service';
 import * as bodyParser from 'body-parser';
 import {StateService} from '../services/state/state-service';
 
 export class Routes {
-  readonly portsService = new PortsService();
-  readonly stateService = new StateService();
+  private readonly stateService = new StateService();
 
   public init(app: express.Application) {
     app.use(bodyParser.json());
@@ -20,7 +18,7 @@ export class Routes {
     // Ports API
     app.route('/api/ports/')
       .post((req: Request, res: Response) => {
-        this.portsService.create(req.body.port);
+        this.stateService.createPort(req.body.port);
         res.status(200).send();
       });
 
