@@ -2,9 +2,9 @@ import * as express from 'express';
 import {Response, Request} from 'express';
 import * as bodyParser from 'body-parser';
 import {StateService} from '../services/state/state-service';
+import {RouteService} from '../services/route/route-service';
 import {ResponseService} from '../services/response/response-service';
 import {PortsService} from '../services/port/ports-service';
-import {RouteService} from '../services/route/route-service';
 
 export class Routes {
 
@@ -30,8 +30,8 @@ export class Routes {
       })
       .post((req: Request, res: Response) => {
         const inputPort = req.body;
-        this.portsService.create(inputPort);
-        res.status(200).send();
+        this.portsService.create(inputPort, res);
+        res.send();
       });
 
     app.route('/api/ports/:id')
