@@ -1,23 +1,27 @@
 import * as express from 'express';
 import {Response, Request} from 'express';
-import {PortsService} from '../services/port/ports-service';
 import * as bodyParser from 'body-parser';
 import {StateService} from '../services/state/state-service';
 import {RouteService} from '../../dist/services/route/route-service';
 import {ResponseService} from '../services/response/response-service';
+import {PortsService} from '../services/port/ports-service';
 
 export class Routes {
+
   readonly portsService = new PortsService();
   readonly stateService = new StateService();
   readonly routeService = new RouteService();
   readonly responseService = new ResponseService();
+
+  private readonly stateService = new StateService();
+
 
   public init(app: express.Application) {
     app.use(bodyParser.json());
 
     app.route('/api/state/')
       .get((req: Request, res: Response) => {
-        const state = this.stateService.get();
+        const state = this.stateService.getState();
         res.status(200).send(state);
       });
 
@@ -26,6 +30,7 @@ export class Routes {
       .post((req: Request, res: Response) => {
         const inputPort = req.body;
         this.portsService.create(inputPort);
+        this.stateService.createPort(req.body.port);
         res.status(200).send();
       });
 

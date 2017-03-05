@@ -1,14 +1,14 @@
 import {IPort} from '../../state-manager/port.model';
 import {StateManager} from '../../state-manager/state-manager';
-import {ActivityManager} from '../../activity-manager/activity-manager';
 import {IRoute} from '../../state-manager/route.model';
 import {RouteService} from '../route/route-service';
+import * as winston from 'winston';
 
 export class PortsService {
-  readonly activityManager = ActivityManager.getInstance();
-  readonly stateManager = StateManager.getInstance();
-  readonly routeService = new RouteService();
-
+  private readonly stateManager = StateManager.getInstance();
+  private readonly routeService = new RouteService();
+  private readonly logger: winston.Winston = winston;
+  
   get(portId: string): IPort {
     return this.stateManager.getPort(portId);
   }
@@ -31,11 +31,20 @@ export class PortsService {
     //   this.stateManager.getRoute()
     // }
     this.activityManager.startActivities();
+  create(port: IPort) {
+    this.stateManager.addPort(port);
+    port.routes.forEach((route: IRoute) => {
+      this.routeService.create(port.id, route);
+    });
+    
+    this.logger.info(`added new port with id: ${port.id} `);
   }
 
-  remove(portId :string) {
-    this.activityManager.stopActivities();
+  update(port: IPort) {
+    //this.stateManager.updatePort(port);
+  }
+
+  remove(portId: string) {
     //this.stateManager.removePort(portId);
-    this.activityManager.startActivities();
   }
 }
