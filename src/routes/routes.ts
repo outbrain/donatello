@@ -44,7 +44,7 @@ export class Routes {
         }
       })
       .put((req: Request, res: Response) => {
-        this.portsService.update(req.params.id, req.body.port);
+        this.portsService.update(req.params.id, req.body);
         res.status(200).send();
       })
       .delete((req: Request, res: Response) => {

@@ -31,12 +31,12 @@ export class PortsService {
   }
 
   update(portId: string, port :IPort) {
-    this.activityManager.stopActivities();
-    // this.stateManager.getPort(portId) = port;
-    // if (port.routes) {
-    //   this.stateManager.getRoute()
-    // }
-    this.activityManager.startActivities();
+    //this.activityManager.stopActivities();
+    this.stateManager.updatePort(portId, port);
+    if (port.routes) {
+      //this.stateManager.getRoute();
+    }
+    //this.activityManager.startActivities();
   }
 
   remove(portId: string) {

@@ -75,4 +75,9 @@ export class StateManager {
     return this.getPort(portId).routes.find((route) => route.id === routeId)
         .responses.find((response) => response.id === responseId);
   }
+
+  updatePort(portId: string, port: IPort) {
+    let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
+    this.state.ports[portIndex] = port;
+  }
 }
