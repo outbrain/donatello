@@ -12,9 +12,11 @@ export class RouteService {
 
   create(portId: string, route: IRoute) {
     this.stateManager.addRoute(portId, route);
-    route.responses.forEach((response) => {
-      this.responseService.create(portId, route.id, response);
-    });
+    if (route.responses) {
+      route.responses.forEach((response) => {
+        this.responseService.create(portId, route.id, response);
+      });
+    }
   }
 
   update(route: IRoute) {

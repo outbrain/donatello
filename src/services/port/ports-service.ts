@@ -21,9 +21,11 @@ export class PortsService {
 
   create(port: IPort) {
     this.stateManager.addPort(port);
-    // port.routes.forEach((route: IRoute) => {
-    //   this.routeService.create(port.id, route);
-    // });
+    if (port.routes) {
+      port.routes.forEach((route: IRoute) => {
+       this.routeService.create(port.id, route);
+      });
+    }
 
     this.logger.info(`added new port with id: ${port.id} `);
   }
