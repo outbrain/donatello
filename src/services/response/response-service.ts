@@ -11,6 +11,10 @@ export class ResponseService {
     active: false
   };
 
+  get(portId: string, routeId: string, responseId: string): IResponse {
+    return this.stateManager.getResponse(portId, routeId, responseId);
+  }
+
   create(portId: string, routeId: string, response: IResponse) {
     this.stateManager.addResponse(
       portId,

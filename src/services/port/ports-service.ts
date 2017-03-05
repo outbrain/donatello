@@ -9,18 +9,27 @@ export class PortsService {
   readonly stateManager = StateManager.getInstance();
   readonly routeService = new RouteService();
 
+  get(portId: string): IPort {
+    return this.stateManager.getPort(portId);
+  }
+
   create(port :IPort) {
     this.activityManager.stopActivities();
+    if (port.routes) {
+      port.routes.forEach((route:IRoute) => {
+        this.routeService.create(port.id, route);
+      });
+    }
     this.stateManager.addPort(port);
-    port.routes.forEach((route :IRoute) => {
-      this.routeService.create(port.id, route);
-    });
     this.activityManager.startActivities();
   }
 
-  update(port :IPort) {
+  update(portId: string, port :IPort) {
     this.activityManager.stopActivities();
-    //this.stateManager.updatePort(port);
+    // this.stateManager.getPort(portId) = port;
+    // if (port.routes) {
+    //   this.stateManager.getRoute()
+    // }
     this.activityManager.startActivities();
   }
 

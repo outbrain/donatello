@@ -3,10 +3,14 @@ import {Response, Request} from 'express';
 import {PortsService} from '../services/port/ports-service';
 import * as bodyParser from 'body-parser';
 import {StateService} from '../services/state/state-service';
+import {RouteService} from '../../dist/services/route/route-service';
+import {ResponseService} from '../services/response/response-service';
 
 export class Routes {
   readonly portsService = new PortsService();
   readonly stateService = new StateService();
+  readonly routeService = new RouteService();
+  readonly responseService = new ResponseService();
 
   public init(app: express.Application) {
     app.use(bodyParser.json());
@@ -20,25 +24,34 @@ export class Routes {
     // Ports API
     app.route('/api/ports/')
       .post((req: Request, res: Response) => {
-        this.portsService.create(req.body.port);
+        const inputPort = req.body;
+        this.portsService.create(inputPort);
         res.status(200).send();
       });
 
     app.route('/api/ports/:id')
+      .get((req: Request, res: Response) => {
+        const port = this.portsService.get(req.params.id);
+        if (port) {
+          res.status(200).send(port);
+        } else {
+          res.status(404).send();
+        }
+      })
       .put((req: Request, res: Response) => {
+        this.portsService.update(req.params.id, req.body.port);
         res.status(200).send();
       })
       .delete((req: Request, res: Response) => {
-        res.status(200).send();
-      });
-
-    app.route('/api/ports:id?')
-      .get((req: Request, res: Response) => {
         res.status(200).send();
       });
 
     // Route API
     app.route('/api/ports/:portId/routes/:id')
+      .get((req: Request, res: Response) => {
+        const route = this.routeService(req.params.portId, req.params.Id);
+        res.status(200).send(route);
+      })
       .post((req: Request, res: Response) => {
         res.status(200).send();
       })
@@ -46,14 +59,15 @@ export class Routes {
         res.status(200).send();
       })
       .delete((req: Request, res: Response) => {
-        res.status(200).send();
-      })
-      .get((req: Request, res: Response) => {
         res.status(200).send();
       });
 
     // Response API
     app.route('/api/ports/:portId/routes/:routeId/responses/:id')
+      .get((req: Request, res: Response) => {
+        const response = this.responseService(req.params.portId, req.params.routeId, req.params.Id);
+        res.status(200).send(response);
+      })
       .post((req: Request, res: Response) => {
         res.status(200).send();
       })
@@ -61,9 +75,6 @@ export class Routes {
         res.status(200).send();
       })
       .delete((req: Request, res: Response) => {
-        res.status(200).send();
-      })
-      .get((req: Request, res: Response) => {
         res.status(200).send();
       });
   }

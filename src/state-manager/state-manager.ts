@@ -66,4 +66,9 @@ export class StateManager {
   getRoute(portId: string, routeId: string): IRoute {
     return this.getPort(portId).routes.find((route) => route.id === routeId);
   }
+
+  getResponse(portId: string, routeId: string, responseId: string): IResponse {
+    return this.getPort(portId).routes.find((route) => route.id === routeId)
+        .responses.find((response) => response.id === responseId);
+  }
 }
