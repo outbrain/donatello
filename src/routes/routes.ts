@@ -11,7 +11,7 @@ export class Routes {
 
     app.route('/api/state/')
       .get((req: Request, res: Response) => {
-        const state = this.stateService.get();
+        const state = this.stateService.getState();
         res.status(200).send(state);
       });
 

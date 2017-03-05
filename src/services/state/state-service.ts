@@ -13,7 +13,7 @@ export class StateService {
   private readonly routeService = new RouteService();
   private readonly responseService = new ResponseService();
 
-  get(): IState {
+  getState(): IState {
     return this.stateManager.getState();
   }
 
