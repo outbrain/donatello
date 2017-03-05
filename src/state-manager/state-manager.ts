@@ -59,6 +59,10 @@ export class StateManager {
     return this.state;
   }
 
+  getPorts(): IPort[] {
+    return this.state.ports;
+  }
+
   getPort(id: string): IPort {
     return this.state.ports.find((port) => port.id === id);
   }

@@ -11,15 +11,19 @@ export class PortsService {
   private readonly activityManager = new ActivityManager();
   private readonly logger: winston.Winston = winston;
 
+  getAll(): IPort[] {
+    return this.stateManager.getPorts();
+  }
+
   get(portId: string): IPort {
     return this.stateManager.getPort(portId);
   }
 
   create(port: IPort) {
     this.stateManager.addPort(port);
-    port.routes.forEach((route: IRoute) => {
-      this.routeService.create(port.id, route);
-    });
+    // port.routes.forEach((route: IRoute) => {
+    //   this.routeService.create(port.id, route);
+    // });
 
     this.logger.info(`added new port with id: ${port.id} `);
   }

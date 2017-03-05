@@ -15,7 +15,6 @@ export class Routes {
 
   private readonly stateService = new StateService();
 
-
   public init(app: express.Application) {
     app.use(bodyParser.json());
 
@@ -27,6 +26,10 @@ export class Routes {
 
     // Ports API
     app.route('/api/ports/')
+      .get((req: Request, res: Response) => {
+        const ports = this.portsService.getAll();
+        res.status(200).send(ports);
+      })
       .post((req: Request, res: Response) => {
         const inputPort = req.body;
         this.portsService.create(inputPort);
