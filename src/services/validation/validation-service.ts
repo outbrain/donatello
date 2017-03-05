@@ -4,10 +4,10 @@ export class ValidationService {
 
   checkIfPortUniqe(port: IPort, entities: any[]): boolean {
     return this.checkIfPropertyUnique('id', port.id, entities) &&
-      this.checkIfPropertyUnique('number', port.number, entities);
+      this.checkIfPropertyUnique('name', port.name, entities);
   }
 
   checkIfPropertyUnique(prop: string, value: string | number, entities: any[]): boolean {
-    return entities.filter((entity) => entity[prop] === value).length === 0;
+    return entities.filter((entity) => entity[prop] === value).length < 1;
   }
 }

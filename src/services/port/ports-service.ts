@@ -50,6 +50,6 @@ export class PortsService {
   }
 
   remove(portId: string) {
-    //this.stateManager.removePort(portId);
+    this.stateManager.removePort(portId);
   }
 }

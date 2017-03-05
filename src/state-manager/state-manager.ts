@@ -78,6 +78,11 @@ export class StateManager {
 
   updatePort(portId: string, port: IPort) {
     let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
-    this.state.ports[portIndex] = port;
+    Object.assign(this.state.ports[portIndex], port);
+  }
+
+  removePort(portId: string) {
+    let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
+    delete this.state.ports[portIndex];
   }
 }

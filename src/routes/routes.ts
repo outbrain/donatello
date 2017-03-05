@@ -48,6 +48,7 @@ export class Routes {
         res.status(200).send();
       })
       .delete((req: Request, res: Response) => {
+        this.portsService.remove(req.params.id);
         res.status(200).send();
       });
 
