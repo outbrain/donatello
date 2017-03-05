@@ -2,9 +2,9 @@ import * as express from 'express';
 import {Response, Request} from 'express';
 import * as bodyParser from 'body-parser';
 import {StateService} from '../services/state/state-service';
-import {RouteService} from '../../dist/services/route/route-service';
 import {ResponseService} from '../services/response/response-service';
 import {PortsService} from '../services/port/ports-service';
+import {RouteService} from '../services/route/route-service';
 
 export class Routes {
 
@@ -12,8 +12,6 @@ export class Routes {
   readonly stateService = new StateService();
   readonly routeService = new RouteService();
   readonly responseService = new ResponseService();
-
-  private readonly stateService = new StateService();
 
   public init(app: express.Application) {
     app.use(bodyParser.json());
@@ -56,8 +54,8 @@ export class Routes {
     // Route API
     app.route('/api/ports/:portId/routes/:id')
       .get((req: Request, res: Response) => {
-        const route = this.routeService(req.params.portId, req.params.Id);
-        res.status(200).send(route);
+        // const route = this.routeService(req.params.portId, req.params.Id);
+        // res.status(200).send(route);
       })
       .post((req: Request, res: Response) => {
         res.status(200).send();
@@ -72,8 +70,8 @@ export class Routes {
     // Response API
     app.route('/api/ports/:portId/routes/:routeId/responses/:id')
       .get((req: Request, res: Response) => {
-        const response = this.responseService(req.params.portId, req.params.routeId, req.params.Id);
-        res.status(200).send(response);
+        // const response = this.responseService(req.params.portId, req.params.routeId, req.params.Id);
+        // res.status(200).send(response);
       })
       .post((req: Request, res: Response) => {
         res.status(200).send();
