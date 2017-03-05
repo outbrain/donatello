@@ -30,7 +30,6 @@ export class Routes {
       .post((req: Request, res: Response) => {
         const inputPort = req.body;
         this.portsService.create(inputPort);
-        this.stateService.createPort(req.body.port);
         res.status(200).send();
       });
 

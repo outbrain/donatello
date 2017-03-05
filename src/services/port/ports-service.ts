@@ -3,25 +3,25 @@ import {StateManager} from '../../state-manager/state-manager';
 import {IRoute} from '../../state-manager/route.model';
 import {RouteService} from '../route/route-service';
 import * as winston from 'winston';
+import {ActivityManager} from '../../activity-manager/activity-manager';
 
 export class PortsService {
   private readonly stateManager = StateManager.getInstance();
   private readonly routeService = new RouteService();
+  private readonly activityManager = new ActivityManager();
   private readonly logger: winston.Winston = winston;
-  
+
   get(portId: string): IPort {
     return this.stateManager.getPort(portId);
   }
 
-  create(port :IPort) {
-    this.activityManager.stopActivities();
-    if (port.routes) {
-      port.routes.forEach((route:IRoute) => {
-        this.routeService.create(port.id, route);
-      });
-    }
+  create(port: IPort) {
     this.stateManager.addPort(port);
-    this.activityManager.startActivities();
+    port.routes.forEach((route: IRoute) => {
+      this.routeService.create(port.id, route);
+    });
+
+    this.logger.info(`added new port with id: ${port.id} `);
   }
 
   update(portId: string, port :IPort) {
@@ -31,14 +31,9 @@ export class PortsService {
     //   this.stateManager.getRoute()
     // }
     this.activityManager.startActivities();
-  create(port: IPort) {
-    this.stateManager.addPort(port);
-    port.routes.forEach((route: IRoute) => {
-      this.routeService.create(port.id, route);
-    });
-    
-    this.logger.info(`added new port with id: ${port.id} `);
   }
+
+
 
   update(port: IPort) {
     //this.stateManager.updatePort(port);
