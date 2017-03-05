@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as request from 'request';
+import * as winston from 'winston';
 import { Request, Response } from 'express';
 import { StateManager } from '../state-manager/state-manager';
 import { IResponse } from '../state-manager/response.model';
@@ -10,6 +11,7 @@ export class ActivityManager {
   private static instance: ActivityManager;
   private readonly stateManager = StateManager.getInstance();
   private readonly listeners: Server[] = [];
+  private readonly logger: winston.Winston = winston;
 
   public static getInstance() {
     return ActivityManager.instance || (ActivityManager.instance = new ActivityManager());
@@ -29,7 +31,7 @@ export class ActivityManager {
 
         if (port.proxy) {
           app.use((req: Request, res: Response) => {
-            console.log(`proxing ${port.name} on ${port.number}`);
+            this.logger.info(`proxing ${port.name} on ${port.number}`);
             request(port.proxy.url).pipe(res);
           });
         }
@@ -41,15 +43,17 @@ export class ActivityManager {
       this.listeners[0].close();
       this.listeners.shift();
     }
+
+    this.logger.info('closing all listening ports..');
   }
 
   private createListener(port: IPort): express.Application {
     const app: express.Application = express();
     const listener = app.listen(port.number, () => {
-      console.log(`start listening ${port.name} on ${port.number}`);
+      this.logger.info(`start listening ${port.name} on ${port.number}`);
     });
-    this.listeners.push(listener);
 
+    this.listeners.push(listener);
     return app;
   }
 
