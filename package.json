@@ -5,7 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "compile": "tsc --watch",
+    "compile": "rm -rf dist && tsc --watch",
     "serve": "nodemon dist/server.js  --watch dist"
   },
   "repository": {

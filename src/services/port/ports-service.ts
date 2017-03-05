@@ -37,12 +37,6 @@ export class PortsService {
     this.activityManager.startActivities();
   }
 
-
-
-  update(port: IPort) {
-    //this.stateManager.updatePort(port);
-  }
-
   remove(portId: string) {
     //this.stateManager.removePort(portId);
   }

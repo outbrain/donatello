@@ -13,5 +13,9 @@
   "files": [
     "src/server.ts",
     "src/main.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }
