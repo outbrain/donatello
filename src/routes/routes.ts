@@ -54,8 +54,8 @@ export class Routes {
     // Route API
     app.route('/api/ports/:portId/routes/:id')
       .get((req: Request, res: Response) => {
-        const route = this.routeService(req.params.portId, req.params.Id);
-        res.status(200).send(route);
+        // const route = this.routeService(req.params.portId, req.params.Id);
+        // res.status(200).send(route);
       })
       .post((req: Request, res: Response) => {
         res.status(200).send();
@@ -70,8 +70,8 @@ export class Routes {
     // Response API
     app.route('/api/ports/:portId/routes/:routeId/responses/:id')
       .get((req: Request, res: Response) => {
-        const response = this.responseService(req.params.portId, req.params.routeId, req.params.Id);
-        res.status(200).send(response);
+        // const response = this.responseService(req.params.portId, req.params.routeId, req.params.Id);
+        // res.status(200).send(response);
       })
       .post((req: Request, res: Response) => {
         res.status(200).send();
