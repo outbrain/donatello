@@ -23,7 +23,7 @@ export class PortsService {
   }
 
   create(port: IPort, res: Response) {
-    if(!this.validationService.checkIfPortUniqe(port, this.getAll())) {
+    if (!this.validationService.checkIfPortUnique(port, this.getAll())) {
       res.status(403);
       this.logger.error('port id or number must be unique!');
       return;
@@ -32,7 +32,7 @@ export class PortsService {
     this.stateManager.addPort(port);
     if (port.routes) {
       port.routes.forEach((route: IRoute) => {
-       this.routeService.create(port.id, route);
+        this.routeService.create(port.id, route);
       });
     }
 
@@ -40,7 +40,7 @@ export class PortsService {
     this.logger.info(`added new port with id: ${port.id} `);
   }
 
-  update(portId: string, port :IPort) {
+  update(portId: string, port: IPort) {
     //this.activityManager.stopActivities();
     this.stateManager.updatePort(portId, port);
     if (port.routes) {

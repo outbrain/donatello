@@ -2,12 +2,12 @@ import {IPort} from '../../state-manager/port.model';
 
 export class ValidationService {
 
-  checkIfPortUniqe(port: IPort, entities: any[]): boolean {
+  checkIfPortUnique(port: IPort, entities: IPort[]): boolean {
     return this.checkIfPropertyUnique('id', port.id, entities) &&
       this.checkIfPropertyUnique('number', port.number, entities);
   }
 
   checkIfPropertyUnique(prop: string, value: string | number, entities: any[]): boolean {
-    return entities.filter((entity) => entity[prop] === value).length < 1;
+    return !!entities.find((entity) => entity[prop] === value);
   }
 }

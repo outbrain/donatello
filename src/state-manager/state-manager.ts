@@ -73,7 +73,7 @@ export class StateManager {
 
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
     return this.getPort(portId).routes.find((route) => route.id === routeId)
-        .responses.find((response) => response.id === responseId);
+      .responses.find((response) => response.id === responseId);
   }
 
   updatePort(portId: string, port: IPort) {

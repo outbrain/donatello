@@ -1,11 +1,11 @@
 import * as express from 'express';
+import {Request, Response} from 'express';
 import * as request from 'request';
 import * as winston from 'winston';
-import { Request, Response } from 'express';
-import { StateManager } from '../state-manager/state-manager';
-import { IResponse } from '../state-manager/response.model';
-import { Server } from 'http';
-import { IPort } from '../state-manager/port.model';
+import {StateManager} from '../state-manager/state-manager';
+import {IResponse} from '../state-manager/response.model';
+import {Server} from 'http';
+import {IPort} from '../state-manager/port.model';
 
 export class ActivityManager {
   private static instance: ActivityManager;
