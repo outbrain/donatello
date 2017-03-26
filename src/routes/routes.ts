@@ -33,7 +33,7 @@ export class Routes {
 
         try {
           this.portsService.create(inputPort);
-          res.status(200);
+          res.status(200).send();
         } catch (e) {
           res.status(403).send(e);
         }
