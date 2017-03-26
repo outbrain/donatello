@@ -39,16 +39,32 @@ export class PortsService {
     this.logger.info(`added new port with id: ${port.id} `);
   }
 
-  update(portId: string, port: IPort) {
+  update(portId: string, newPort: IPort) {
     //this.activityManager.stopActivities();
-    this.stateManager.updatePort(portId, port);
-    if (port.routes) {
+    const port = this.get(portId);
+
+    if(!port) {
+      const errorMsg = `port with id ${portId} does not exist`;
+      this.logger.error(errorMsg);
+      throw errorMsg;
+    }
+
+    this.stateManager.updatePort(portId, newPort);
+    if (newPort.routes) {
       //this.stateManager.getRoute();
     }
     //this.activityManager.startActivities();
   }
 
   remove(portId: string) {
+    const port = this.get(portId);
+
+    if(!port) {
+      const errorMsg = `port with id ${portId} does not exist`;
+      this.logger.error(errorMsg);
+      throw errorMsg;
+    }
+
     this.stateManager.removePort(portId);
   }
 }

@@ -42,6 +42,7 @@ export class Routes {
     app.route('/api/ports/:id')
       .get((req: Request, res: Response) => {
         const port = this.portsService.get(req.params.id);
+
         if (port) {
           res.status(200).send(port);
         } else {
@@ -49,12 +50,20 @@ export class Routes {
         }
       })
       .put((req: Request, res: Response) => {
-        this.portsService.update(req.params.id, req.body);
-        res.status(200).send();
+        try {
+          this.portsService.update(req.params.id, req.body);
+          res.status(200).send();
+        } catch (e) {
+          res.status(403).send(e);
+        }
       })
       .delete((req: Request, res: Response) => {
-        this.portsService.remove(req.params.id);
-        res.status(200).send();
+        try {
+          this.portsService.remove(req.params.id);
+          res.status(200).send();
+        } catch (e) {
+          res.status(403).send(e);
+        }
       });
 
     // Route API

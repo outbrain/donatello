@@ -64,7 +64,7 @@ export class StateManager {
   }
 
   getPort(id: string): IPort {
-    return this.state.ports.find((port) => port.id === id);
+    return this.state.ports.find((port) => port.id == id);
   }
 
   getRoute(portId: string, routeId: string): IRoute {
@@ -77,12 +77,12 @@ export class StateManager {
   }
 
   updatePort(portId: string, port: IPort) {
-    let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
+    let portIndex = this.state.ports.findIndex((portFound) => portFound.id == portId);
     Object.assign(this.state.ports[portIndex], port);
   }
 
   removePort(portId: string) {
-    let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
-    delete this.state.ports[portIndex];
+    let portIndex = this.state.ports.findIndex((portFound) => portFound.id == portId);
+    this.state.ports.splice(portIndex, 1);
   }
 }
