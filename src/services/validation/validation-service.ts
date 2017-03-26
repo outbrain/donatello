@@ -8,6 +8,6 @@ export class ValidationService {
   }
 
   checkIfPropertyUnique(prop: string, value: string | number, entities: any[]): boolean {
-    return !!entities.find((entity) => entity[prop] === value);
+    return !entities.find((entity) => entity[prop] === value);
   }
 }
