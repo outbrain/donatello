@@ -2,7 +2,6 @@ import {IPort} from '../../state-manager/port.model';
 import {StateManager} from '../../state-manager/state-manager';
 import {IRoute} from '../../state-manager/route.model';
 import {RouteService} from '../route/route-service';
-import {Response} from 'express';
 import {ActivityManager} from '../../activity-manager/activity-manager';
 import {ValidationService} from '../validation/validation-service';
 import * as winston from 'winston';
@@ -22,21 +21,21 @@ export class PortsService {
     return this.stateManager.getPort(portId);
   }
 
-  create(port: IPort, res: Response) {
+  create(port: IPort) {
     if (!this.validationService.checkIfPortUnique(port, this.getAll())) {
-      res.status(403);
-      this.logger.error('port id or number must be unique!');
-      return;
+      const errorMsg = 'port id or number must be unique!';
+      this.logger.error(errorMsg);
+      throw errorMsg;
     }
 
     this.stateManager.addPort(port);
+
     if (port.routes) {
       port.routes.forEach((route: IRoute) => {
         this.routeService.create(port.id, route);
       });
     }
 
-    res.status(200);
     this.logger.info(`added new port with id: ${port.id} `);
   }
 

@@ -30,8 +30,13 @@ export class Routes {
       })
       .post((req: Request, res: Response) => {
         const inputPort = req.body;
-        this.portsService.create(inputPort, res);
-        res.send();
+
+        try {
+          this.portsService.create(inputPort);
+          res.status(200);
+        } catch (e) {
+          res.status(403).send(e);
+        }
       });
 
     app.route('/api/ports/:id')
