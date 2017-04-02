@@ -28,15 +28,11 @@ export class StateService {
   }
 
   getPorts() {
-    this.activityManager.stopActivities();
-    this.portService.getAll();
-    this.activityManager.startActivities();
+    return this.portService.getAll();
   }
 
   getPort(portId: string) {
-    this.activityManager.stopActivities();
-    this.portService.get(portId);
-    this.activityManager.startActivities();
+    return this.portService.get(portId);
   }
 
   updatePort(portId: string, newPort: IPort) {
