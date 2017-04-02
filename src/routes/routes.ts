@@ -5,6 +5,8 @@ import {StateService} from '../services/state/state-service';
 import {RouteService} from '../services/route/route-service';
 import {ResponseService} from '../services/response/response-service';
 import {PortsService} from '../services/port/ports-service';
+import {IRoute} from '../state-manager/route.model';
+
 
 export class Routes {
 
@@ -67,18 +69,37 @@ export class Routes {
       });
 
     // Route API
+    app.route('/api/ports/:portId/routes')
+        .get((req: Request, res: Response) => {
+          const routes = this.routeService.getAllByPortId(req.params.portId);
+          res.status(200).send(routes);
+        })
+        .post((req: Request, res: Response) => {
+          const inputRoute: IRoute = req.body;
+
+          try {
+            this.routeService.createRoute(req.params.portId, inputRoute);
+            res.status(200).send();
+          } catch (e) {
+            res.status(403).send(e);
+          }
+        });
+
     app.route('/api/ports/:portId/routes/:id')
       .get((req: Request, res: Response) => {
-        // const route = this.routeService(req.params.portId, req.params.Id);
-        // res.status(200).send(route);
+         const route = this.routeService.get(req.params.portId, req.params.id);
+         res.status(200).send(route);
       })
       .post((req: Request, res: Response) => {
         res.status(200).send();
       })
       .put((req: Request, res: Response) => {
+        const inputRoute = req.body;
+        this.routeService.update(req.params.portId, req.params.id, inputRoute);
         res.status(200).send();
       })
       .delete((req: Request, res: Response) => {
+        this.routeService.remove(req.params.portId, req.params.id);
         res.status(200).send();
       });
 
