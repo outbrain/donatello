@@ -38,4 +38,12 @@ export class StateService {
     this.portService.remove(portId);
     this.activityManager.startActivities();
   }
+
+  getAllPorts() {
+    this.portService.getAll();
+  }
+
+  getResponse(portId: number, routeId: number, responseId: number) {
+
+  }
 }
