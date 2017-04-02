@@ -50,6 +50,4 @@ export class StateService {
     this.portService.remove(portId);
     this.activityManager.startActivities();
   }
-
-  
 }

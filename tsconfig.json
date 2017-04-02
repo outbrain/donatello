@@ -8,7 +8,8 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "inlineSources": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "experimentalDecorators": true
   },
   "files": [
     "src/server.ts",
