@@ -25,7 +25,7 @@ export class Routes {
     // Ports API
     app.route('/api/ports/')
       .get((req: Request, res: Response) => {
-        const ports = this.stateService.getAllPorts();
+        const ports = this.stateService.getPorts();
         res.status(200).send(ports);
       })
       .post((req: Request, res: Response) => {
@@ -41,7 +41,7 @@ export class Routes {
 
     app.route('/api/ports/:id')
       .get((req: Request, res: Response) => {
-        const port = this.portsService.get(req.params.id);
+        const port = this.stateService.getPort(req.params.id);
 
         if (port) {
           res.status(200).send(port);
