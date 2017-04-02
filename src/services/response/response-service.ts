@@ -11,24 +11,12 @@ export class ResponseService {
     active: false
   };
 
-  get(portId: string, routeId: string, responseId: string): IResponse {
-    return this.stateManager.getResponse(portId, routeId, responseId);
-  }
-
-  create(portId: string, routeId: string, response: IResponse) {
+  create(portId: string, routeId: string, response: IResponse) { //todo: add validations
     this.stateManager.addResponse(
       portId,
       routeId,
       Object.assign({}, this.DEFAULT_RESPONSE, response)
     );
-  }
-
-  update(response: IResponse) {
-    //this.stateManager.updateResponse(response);
-  }
-
-  remove(responseId: string) {
-    //this.stateManager.removeResponse(responseId);
   }
 }
 

@@ -2,9 +2,11 @@ import {IState} from './state.model';
 import {IPort} from './port.model';
 import {IRoute} from './route.model';
 import {IResponse} from './response.model';
+import * as winston from 'winston';
 
 export class StateManager {
   private static instance: StateManager;
+  private readonly logger: winston.Winston = winston;
   private readonly state: IState = {
     ports: []
   };
@@ -41,6 +43,12 @@ export class StateManager {
   addResponse(portId: string, routeId: string, response: IResponse) {
     const route = this.getRoute(portId, routeId);
 
+    if(!route) {
+      const errorMsg = `route with id ${routeId} does not exist`;
+      this.logger.error(errorMsg);
+      throw errorMsg;
+    }
+
     if (!route.responses) {
       route.responses = [];
     }
@@ -59,6 +67,10 @@ export class StateManager {
     return this.state;
   }
 
+  setState(state: IState): IState {
+    return this.state;
+  }
+
   getPorts(): IPort[] {
     return this.state.ports;
   }
@@ -71,18 +83,13 @@ export class StateManager {
     return this.getPort(portId).routes.find((route) => route.id === routeId);
   }
 
-  getResponse(portId: string, routeId: string, responseId: string): IResponse {
-    return this.getPort(portId).routes.find((route) => route.id === routeId)
-      .responses.find((response) => response.id === responseId);
-  }
-
   updatePort(portId: string, port: IPort) {
-    let portIndex = this.state.ports.findIndex((portFound) => portFound.id == portId);
+    let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
     Object.assign(this.state.ports[portIndex], port);
   }
 
   removePort(portId: string) {
-    let portIndex = this.state.ports.findIndex((portFound) => portFound.id == portId);
+    let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
     this.state.ports.splice(portIndex, 1);
   }
 }

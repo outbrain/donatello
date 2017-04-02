@@ -1,4 +1,5 @@
 import {IPort} from '../../state-manager/port.model';
+import {IState} from '../../state-manager/state.model';
 
 export class ValidationService {
 
