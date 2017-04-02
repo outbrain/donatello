@@ -27,6 +27,18 @@ export class StateService {
     return this.stateManager.getState();
   }
 
+  getPorts() {
+    this.activityManager.stopActivities();
+    this.portService.getAll();
+    this.activityManager.startActivities();
+  }
+
+  getPort(portId: string) {
+    this.activityManager.stopActivities();
+    this.portService.get(portId);
+    this.activityManager.startActivities();
+  }
+
   updatePort(portId: string, newPort: IPort) {
     this.activityManager.stopActivities();
     this.portService.update(portId, newPort);
@@ -38,4 +50,6 @@ export class StateService {
     this.portService.remove(portId);
     this.activityManager.startActivities();
   }
+
+  
 }
