@@ -32,7 +32,7 @@ export class Routes {
         const inputPort = req.body;
 
         try {
-          this.portsService.create(inputPort);
+          this.stateService.createPort(inputPort);
           res.status(200).send();
         } catch (e) {
           res.status(403).send(e);
@@ -51,7 +51,7 @@ export class Routes {
       })
       .put((req: Request, res: Response) => {
         try {
-          this.portsService.update(req.params.id, req.body);
+          this.stateService.updatePort(req.params.id, req.body);
           res.status(200).send();
         } catch (e) {
           res.status(403).send(e);
@@ -59,7 +59,7 @@ export class Routes {
       })
       .delete((req: Request, res: Response) => {
         try {
-          this.portsService.remove(req.params.id);
+          this.stateService.removePort(req.params.id);
           res.status(200).send();
         } catch (e) {
           res.status(403).send(e);
