@@ -24,7 +24,6 @@ export class ActivityManager {
       .forEach((port) => {
         const app = this.createListener(port);
         port.routes.filter(router => router.active).forEach((route) => {
-          console.log('here');
           (<any>app)[route.method.toLowerCase()](route.path, (req: Request, res: Response) => {
             this.handleResponse(route.responses, req, res);
           });
