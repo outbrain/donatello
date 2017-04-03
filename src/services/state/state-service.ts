@@ -67,6 +67,12 @@ export class StateService {
     this.activityManager.startActivities();
   }
 
+  createRoutes(portId: string, inputRoute: IRoute) {
+    this.activityManager.stopActivities();
+    return this.routeService.createRoute(portId, inputRoute);
+    this.activityManager.startActivities();
+  }
+
   getRoutes(portId: string) :IRoute[] {
     return this.routeService.getAllByPortId(portId);
   }
@@ -76,7 +82,15 @@ export class StateService {
   }
 
   updateRoute(portId: string, routeId: string, route: IRoute) {
+    this.activityManager.stopActivities();
     return this.routeService.update(portId, routeId, route);
+    this.activityManager.startActivities();
+  }
+
+  removeRoute(portId: string, routeId: string) {
+    this.activityManager.stopActivities();
+    return this.routeService.remove(portId, routeId);
+    this.activityManager.startActivities();
   }
 
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
