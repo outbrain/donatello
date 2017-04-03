@@ -122,8 +122,7 @@ export class StateService {
     this.responseService.deactivateResponse(portId, routeId, responseId);
     return _.cloneDeep(this.stateManager.getState());
   }
-
-  removeResponse(portId: string, routeId: string, responseId: string): IState {
+  
   activateRoute(portId: string, routeId: string) {
     this.routeService.activateRoute(portId, routeId);
   }
