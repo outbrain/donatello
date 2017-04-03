@@ -10,6 +10,7 @@ import * as winston from 'winston';
 import {IRoute} from '../../state-manager/route.model';
 import {IResponse} from '../../state-manager/response.model';
 
+
 export class StateService {
   readonly activityManager = ActivityManager.getInstance();
   readonly stateManager = StateManager.getInstance();
@@ -20,6 +21,7 @@ export class StateService {
   private readonly validationService = new ValidationService();
 
   createState(state: IState) {
+
     this.activityManager.stopActivities();
     const currentState: IState = this.stateManager.getState();
     currentState.ports = [];

@@ -3,6 +3,7 @@ import {IPort} from './port.model';
 import {IRoute} from './route.model';
 import {IResponse} from './response.model';
 import * as winston from 'winston';
+import * as _ from 'lodash';
 
 export class StateManager {
   private static instance: StateManager;
@@ -64,23 +65,23 @@ export class StateManager {
   }
 
   getState(): IState {
-    return this.state;
+    return _.cloneDeep(this.state);
   }
 
   getPorts(): IPort[] {
-    return this.state.ports;
+    return _.cloneDeep(this.state.ports);
   }
 
   getPort(id: string): IPort {
-    return this.state.ports.find((port) => port.id === id);
+    return _.cloneDeep(this.state.ports.find((port) => port.id === id));
   }
 
   getRoute(portId: string, routeId: string): IRoute {
-    return this.getPort(portId).routes.find((route) => route.id === routeId);
+    return _.cloneDeep(this.getPort(portId).routes.find((route) => route.id === routeId));
   }
 
   getRoutes(portId: string): IRoute[] {
-    return this.getPort(portId).routes;
+    return _.cloneDeep(this.getPort(portId).routes);
   }
 
   updateRoute(portId: string, routeId: string, routeUpdated: IRoute) {
@@ -94,8 +95,8 @@ export class StateManager {
   }
 
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
-    return this.getPort(portId).routes.find((route) => route.id === routeId)
-        .responses.find((response) => response.id === responseId);
+    return _.cloneDeep(this.getPort(portId).routes.find((route) => route.id === routeId)
+        .responses.find((response) => response.id === responseId));
   }
 
   activateResponse(portId: string, routeId: string, responseId: string) {
