@@ -99,9 +99,9 @@ export class StateManager {
   }
 
   deactivateRoute(portId: string, routeId: string) {
-    this.updateRoute(portId, routeId, {active: false})
+    this.updateRoute(portId, routeId, {active: false});
   }
-  
+
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
     return this.getPort(portId).routes.find((route) => route.id === routeId)
         .responses.find((response) => response.id === responseId);
