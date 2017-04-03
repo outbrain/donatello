@@ -113,7 +113,7 @@ export class Routes {
     // Response API
     app.route('/api/ports/:portId/routes/:routeId/responses/:id')
       .get((req: Request, res: Response) => {
-        const response: IResponse = this.stateService.getResponse(req.params.portId, req.params.routeId, req.params.Id);
+        const response: IResponse = this.stateService.getResponse(req.params.portId, req.params.routeId, req.params.id);
         if (response) {
           res.status(200).send(response);
         } else {
@@ -127,14 +127,13 @@ export class Routes {
         } catch (e) {
           res.status(404).send();
         }
-
       })
       .put((req: Request, res: Response) => {
-        this.stateService.updateResponse(req.params.portId, req.params.routeId, req.params.Id, req.body);
+        this.stateService.updateResponse(req.params.portId, req.params.routeId, req.params.id, req.body);
         res.status(200).send();
       })
       .delete((req: Request, res: Response) => {
-        this.stateService.removeResponse(req.params.portId, req.params.routeId, req.params.Id, req.body);
+        this.stateService.removeResponse(req.params.portId, req.params.routeId, req.params.Id);
         res.status(200).send();
       });
   }
