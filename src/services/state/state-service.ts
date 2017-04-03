@@ -122,7 +122,7 @@ export class StateService {
     this.responseService.deactivateResponse(portId, routeId, responseId);
     return _.cloneDeep(this.stateManager.getState());
   }
-  
+
   activateRoute(portId: string, routeId: string) {
     this.routeService.activateRoute(portId, routeId);
   }
