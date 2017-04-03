@@ -1,6 +1,6 @@
 export interface IResponse {
-  id: string;
-  name: string;
+  id?: string;
+  name?: string;
   status?: number;
   delay?: number;
   data?: any;
