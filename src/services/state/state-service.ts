@@ -20,17 +20,16 @@ export class StateService {
   private readonly logger: winston.Winston = winston;
   private readonly validationService = new ValidationService();
 
-  createState(state: IState): IState {
+  createState(state: IState) {
     this.activityManager.stopActivities();
     const currentState: IState = this.stateManager.getState();
     currentState.ports = [];
 
     state.ports.forEach((port: IPort) => {
-      this.createPort(port);
+      this.portService.create(_.cloneDeep(port))
     });
 
     this.activityManager.startActivities();
-    return _.cloneDeep(this.stateManager.getState());
   }
 
   createPort(port: IPort): IState {
