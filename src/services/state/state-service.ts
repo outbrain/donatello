@@ -9,7 +9,7 @@ import {ValidationService} from '../validation/validation-service';
 import * as winston from 'winston';
 import {IRoute} from '../../state-manager/route.model';
 import {IResponse} from '../../state-manager/response.model';
-
+import * as _ from 'lodash';
 
 export class StateService {
   readonly activityManager = ActivityManager.getInstance();
@@ -35,25 +35,25 @@ export class StateService {
 
   createPort(port: IPort): void {
     this.activityManager.stopActivities();
-    this.portService.create(port);
+    this.portService.create(_.cloneDeep(port));
     this.activityManager.startActivities();
   }
 
   getState(): IState {
-    return this.stateManager.getState();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
   getPorts(): IPort[] {
-    return this.portService.getAll();
+    return _.cloneDeep(this.portService.getAll());
   }
 
   getPort(portId: string): IPort {
-    return this.portService.get(portId);
+    return _.cloneDeep(this.portService.get(portId));
   }
 
   updatePort(portId: string, newPort: IPort) {
     this.activityManager.stopActivities();
-    this.portService.update(portId, newPort);
+    this.portService.update(portId, _.cloneDeep(newPort));
     this.activityManager.startActivities();
   }
 
@@ -65,21 +65,21 @@ export class StateService {
 
   createRoute(portId: string, inputRoute: IRoute) {
     this.activityManager.stopActivities();
-    this.routeService.createRoute(portId, inputRoute);
+    this.routeService.createRoute(portId, _.cloneDeep(inputRoute));
     this.activityManager.startActivities();
   }
 
   getRoutes(portId: string) :IRoute[] {
-    return this.routeService.getAllByPortId(portId);
+    return _.cloneDeep(this.routeService.getAllByPortId(portId));
   }
 
   getRoute(portId: string, routeId: string): IRoute {
-    return this.routeService.get(portId, routeId);
+    return _.cloneDeep(this.routeService.get(portId, routeId));
   }
 
   updateRoute(portId: string, routeId: string, route: IRoute) {
     this.activityManager.stopActivities();
-    this.routeService.update(portId, routeId, route);
+    this.routeService.update(portId, routeId, _.cloneDeep(route));
     this.activityManager.startActivities();
   }
 
@@ -90,18 +90,18 @@ export class StateService {
   }
 
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
-    return this.responseService.get(portId, routeId, responseId);
+    return _.cloneDeep(this.responseService.get(portId, routeId, responseId));
   }
 
   createResponse(portId: string, routeId: string, response: IResponse) {
     this.activityManager.stopActivities();
-    this.responseService.create(portId, routeId, response);
+    this.responseService.create(portId, routeId, _.cloneDeep(response));
     this.activityManager.startActivities();
   }
 
   updateResponse(portId: string, routeId: string, responseId: string, newResponse: IResponse) {
     this.activityManager.stopActivities();
-    this.responseService.update(portId, routeId, responseId, newResponse);
+    this.responseService.update(portId, routeId, responseId, _.cloneDeep(newResponse));
     this.activityManager.startActivities();
   }
 
