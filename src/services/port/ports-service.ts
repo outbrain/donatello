@@ -32,7 +32,7 @@ export class PortsService {
 
     if (port.routes) {
       port.routes.forEach((route: IRoute) => {
-        this.routeService.create(port.id, route);
+        this.routeService.createRoute(port.id, route);
       });
     }
 

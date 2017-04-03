@@ -67,10 +67,6 @@ export class StateManager {
     return this.state;
   }
 
-  setState(state: IState): IState {
-    return this.state;
-  }
-
   getPorts(): IPort[] {
     return this.state.ports;
   }
@@ -81,6 +77,25 @@ export class StateManager {
 
   getRoute(portId: string, routeId: string): IRoute {
     return this.getPort(portId).routes.find((route) => route.id === routeId);
+  }
+
+  getRoutes(portId: string): IRoute[] {
+    return this.getPort(portId).routes;
+  }
+
+  updateRoute(portId: string, routeId: string, routeUpdated: IRoute) {
+    const index = this.getPort(portId).routes.findIndex((route) => route.id === routeId);
+    this.getPort(portId).routes[index] = <IRoute>{...this.getPort(portId).routes[index], ...routeUpdated};
+  }
+
+  removeRoute(portId: string, routeId: string) {
+    const index = this.getPort(portId).routes.findIndex((route) => route.id === routeId);
+    this.getPort(portId).routes.splice(index, 1);
+  }
+
+  getResponse(portId: string, routeId: string, responseId: string): IResponse {
+    return this.getPort(portId).routes.find((route) => route.id === routeId)
+        .responses.find((response) => response.id === responseId);
   }
 
   updatePort(portId: string, port: IPort) {

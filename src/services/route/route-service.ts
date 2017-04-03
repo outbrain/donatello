@@ -10,7 +10,11 @@ export class RouteService {
     return this.stateManager.getRoute(portId, routeId);
   }
 
-  create(portId: string, route: IRoute) {
+  getAllByPortId(portId: string) {
+    return this.stateManager.getRoutes(portId);
+  }
+
+  createRoute(portId: string, route: IRoute) {
     this.stateManager.addRoute(portId, route);
     if (route.responses) {
       route.responses.forEach((response) => {
@@ -19,11 +23,11 @@ export class RouteService {
     }
   }
 
-  update(route: IRoute) {
-    //this.stateManager.updateRoute(route);
+  update(portId: string, routeId: string, route: IRoute) {
+    this.stateManager.updateRoute(portId, routeId, route);
   }
 
-  remove(routeId: string) {
-    //this.stateManager.removeRoute(routeId);
+  remove(portId: string, routeId: string) {
+    this.stateManager.removeRoute(portId, routeId);
   }
 }

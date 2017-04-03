@@ -7,14 +7,14 @@ import {ResponseService} from '../response/response-service';
 import {IPort} from '../../state-manager/port.model';
 import {ValidationService} from '../validation/validation-service';
 import * as winston from 'winston';
-import {IResponse} from '../../state-manager/response.model';
 import {IRoute} from '../../state-manager/route.model';
+import {IResponse} from '../../state-manager/response.model';
 
 export class StateService {
   readonly activityManager = ActivityManager.getInstance();
   readonly stateManager = StateManager.getInstance();
   private readonly portService = new PortsService();
-  private readonly rosuteService = new RouteService();
+  private readonly routeService = new RouteService();
   private readonly responseService = new ResponseService();
   private readonly logger: winston.Winston = winston;
   private readonly validationService = new ValidationService();
@@ -48,11 +48,11 @@ export class StateService {
     return this.stateManager.getState();
   }
 
-  getPorts() {
+  getPorts(): IPort[] {
     return this.portService.getAll();
   }
 
-  getPort(portId: string) {
+  getPort(portId: string): IPort {
     return this.portService.get(portId);
   }
 
@@ -66,6 +66,18 @@ export class StateService {
     this.activityManager.stopActivities();
     this.portService.remove(portId);
     this.activityManager.startActivities();
+  }
+
+  getRoutes(portId: string) :IRoute[] {
+    return this.routeService.getAllByPortId(portId);
+  }
+
+  getRoute(portId: string, routeId: string): IRoute {
+    return this.routeService.get(portId, routeId);
+  }
+
+  updateRoute(portId: string, routeId: string, route: IRoute) {
+    return this.routeService.update(portId, routeId, route);
   }
 
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
@@ -100,11 +112,11 @@ export class StateService {
     this.activityManager.startActivities();
   }
 
-  // removeResponse(portId: string, routeId: string, responseId: string) {
-  //   this.activityManager.stopActivities();
-  //   const route: IRoute = this.getRoute(portId, routeId);
-  //   const responseIndex: number = route.responses.findIndex((response: IResponse) => response.id === responseId);
-  //   route.responses.splice(responseIndex, 1);
-  //   this.activityManager.startActivities();
-  // }
+  removeResponse(portId: string, routeId: string, responseId: string) {
+    this.activityManager.stopActivities();
+    const route: IRoute = this.getRoute(portId, routeId);
+    const responseIndex: number = route.responses.findIndex((response: IResponse) => response.id === responseId);
+    route.responses.splice(responseIndex, 1);
+    this.activityManager.startActivities();
+  }
 }
