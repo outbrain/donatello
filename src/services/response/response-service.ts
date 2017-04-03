@@ -50,6 +50,10 @@ export class ResponseService {
     Object.assign(this.get(portId, routeId, responseId), newResponse);
   }
 
+  activateResponse(portId: string, routeId: string, responseId: string) {
+    this.stateManager.activateResponse(portId, routeId, responseId);
+  }
+
   remove(portId: string, routeId: string, responseId: string) {
     const route: IRoute = this.stateManager.getRoute(portId, routeId);
     const responseIndex: number = route.responses.findIndex((response: IResponse) => response.id === responseId);

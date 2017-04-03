@@ -67,7 +67,7 @@ export class StateService {
     this.activityManager.startActivities();
   }
 
-  createRoutes(portId: string, inputRoute: IRoute) {
+  createRoute(portId: string, inputRoute: IRoute) {
     this.activityManager.stopActivities();
     this.routeService.createRoute(portId, inputRoute);
     this.activityManager.startActivities();
@@ -107,6 +107,10 @@ export class StateService {
     this.activityManager.stopActivities();
     this.responseService.update(portId, routeId, responseId, newResponse);
     this.activityManager.startActivities();
+  }
+
+  activateResponse(portId: string, routeId: string, responseId: string) {
+    this.responseService.activateResponse(portId, routeId, responseId);
   }
 
   removeResponse(portId: string, routeId: string, responseId: string) {
