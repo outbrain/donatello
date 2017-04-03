@@ -113,6 +113,10 @@ export class StateService {
     this.responseService.activateResponse(portId, routeId, responseId);
   }
 
+  deactivateResponse(portId: string, routeId: string, responseId: string) {
+    this.responseService.deactivateResponse(portId, routeId, responseId);
+  }
+
   removeResponse(portId: string, routeId: string, responseId: string) {
     this.activityManager.stopActivities();
     this.responseService.remove(portId, routeId, responseId);

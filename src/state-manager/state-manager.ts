@@ -103,6 +103,11 @@ export class StateManager {
         .responses.map((response) => response.id === responseId ? response.active = true : response.active = false);
   }
 
+  deactivateResponse(portId: string, routeId: string, responseId: string) {
+    this.getPort(portId).routes.find((route) => route.id === routeId)
+        .responses.find((response) => response.id === responseId).active = false;
+  }
+
   updatePort(portId: string, port: IPort) {
     let portIndex = this.state.ports.findIndex((portFound) => portFound.id === portId);
     Object.assign(this.state.ports[portIndex], port);
