@@ -22,16 +22,10 @@ export class StateService {
   createState(state: IState) {
     this.activityManager.stopActivities();
     const currentState: IState = this.stateManager.getState();
-    currentState.ports.length = 0;
+    currentState.ports = [];
 
     state.ports.forEach((port: IPort) => {
       this.createPort(port);
-      port.routes.forEach((route: IRoute) => {
-        this.routeService.createRoute(port.id, route);
-        route.responses.forEach((response: IResponse) => {
-          this.createResponse(port.id, route.id, response);
-        });
-      });
     });
 
     this.activityManager.startActivities();
