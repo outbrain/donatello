@@ -20,8 +20,7 @@ export class StateService {
   private readonly logger: winston.Winston = winston;
   private readonly validationService = new ValidationService();
 
-  createState(state: IState) {
-
+  createState(state: IState): IState {
     this.activityManager.stopActivities();
     const currentState: IState = this.stateManager.getState();
     currentState.ports = [];
@@ -31,12 +30,14 @@ export class StateService {
     });
 
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
-  createPort(port: IPort): void {
+  createPort(port: IPort): IState {
     this.activityManager.stopActivities();
     this.portService.create(_.cloneDeep(port));
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
   getState(): IState {
@@ -51,25 +52,28 @@ export class StateService {
     return _.cloneDeep(this.portService.get(portId));
   }
 
-  updatePort(portId: string, newPort: IPort) {
+  updatePort(portId: string, newPort: IPort): IState {
     this.activityManager.stopActivities();
     this.portService.update(portId, _.cloneDeep(newPort));
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
-  removePort(portId: string) {
+  removePort(portId: string): IState {
     this.activityManager.stopActivities();
     this.portService.remove(portId);
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
-  createRoute(portId: string, inputRoute: IRoute) {
+  createRoute(portId: string, inputRoute: IRoute): IState {
     this.activityManager.stopActivities();
     this.routeService.createRoute(portId, _.cloneDeep(inputRoute));
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
-  getRoutes(portId: string) :IRoute[] {
+  getRoutes(portId: string): IRoute[] {
     return _.cloneDeep(this.routeService.getAllByPortId(portId));
   }
 
@@ -77,45 +81,52 @@ export class StateService {
     return _.cloneDeep(this.routeService.get(portId, routeId));
   }
 
-  updateRoute(portId: string, routeId: string, route: IRoute) {
+  updateRoute(portId: string, routeId: string, route: IRoute): IState {
     this.activityManager.stopActivities();
     this.routeService.update(portId, routeId, _.cloneDeep(route));
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
-  removeRoute(portId: string, routeId: string) {
+  removeRoute(portId: string, routeId: string): IState {
     this.activityManager.stopActivities();
     this.routeService.remove(portId, routeId);
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
     return _.cloneDeep(this.responseService.get(portId, routeId, responseId));
   }
 
-  createResponse(portId: string, routeId: string, response: IResponse) {
+  createResponse(portId: string, routeId: string, response: IResponse): IState {
     this.activityManager.stopActivities();
     this.responseService.create(portId, routeId, _.cloneDeep(response));
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
-  updateResponse(portId: string, routeId: string, responseId: string, newResponse: IResponse) {
+  updateResponse(portId: string, routeId: string, responseId: string, newResponse: IResponse): IState {
     this.activityManager.stopActivities();
     this.responseService.update(portId, routeId, responseId, _.cloneDeep(newResponse));
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 
   activateResponse(portId: string, routeId: string, responseId: string) {
     this.responseService.activateResponse(portId, routeId, responseId);
+    return _.cloneDeep(this.stateManager.getState());
   }
 
   deactivateResponse(portId: string, routeId: string, responseId: string) {
     this.responseService.deactivateResponse(portId, routeId, responseId);
+    return _.cloneDeep(this.stateManager.getState());
   }
 
-  removeResponse(portId: string, routeId: string, responseId: string) {
+  removeResponse(portId: string, routeId: string, responseId: string): IState {
     this.activityManager.stopActivities();
     this.responseService.remove(portId, routeId, responseId);
     this.activityManager.startActivities();
+    return _.cloneDeep(this.stateManager.getState());
   }
 }
