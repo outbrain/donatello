@@ -30,4 +30,12 @@ export class RouteService {
   remove(portId: string, routeId: string) {
     this.stateManager.removeRoute(portId, routeId);
   }
+
+  activateRoute(portId: string, routeId: string) {
+    this.stateManager.activateRoute(portId, routeId);
+  }
+
+  deactivateRoute(portId: string, routeId: string) {
+    this.stateManager.deactivateRoute(portId, routeId);
+  }
 }
