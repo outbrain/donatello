@@ -23,12 +23,15 @@ export class ActivityManager {
       .filter(port => port.active)
       .forEach((port) => {
         const app = this.createListener(port);
-        port.routes.filter(router => router.active).forEach((route) => {
-          const regexPath = new RegExp(route.path);
-          (<any>app)[route.method.toLowerCase()](regexPath, (req: Request, res: Response) => {
-            this.handleResponse(route.responses, req, res);
+
+        if (port.routes) {
+          port.routes.filter(router => router.active).forEach((route) => {
+            const regexPath = new RegExp(route.path);
+            (<any>app)[route.method.toLowerCase()](regexPath, (req: Request, res: Response) => {
+              this.handleResponse(route.responses, req, res);
+            });
           });
-        });
+        }
 
         if (port.proxy) {
           app.use((req: Request, res: Response) => {
