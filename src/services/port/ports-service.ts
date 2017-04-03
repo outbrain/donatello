@@ -67,4 +67,12 @@ export class PortsService {
 
     this.stateManager.removePort(portId);
   }
+
+  activatePort(portId: string) {
+    this.stateManager.updatePort(portId, {active: true});
+  }
+
+  deactivatePort(portId: string) {
+    this.stateManager.updatePort(portId, {active: false});
+  }
 }

@@ -112,13 +112,23 @@ export class StateService {
     return _.cloneDeep(this.stateManager.getState());
   }
 
+  activatePort(portId: string) {
+    this.portService.activatePort(portId);
+    return _.cloneDeep(this.stateManager.getState());
+  }
+
+  deactivatePort(portId: string) {
+    this.portService.deactivatePort(portId);
+    return _.cloneDeep(this.stateManager.getState());
+  }
+
   activateResponse(portId: string, routeId: string, responseId: string) {
-    this.responseService.activateResponse(portId, routeId, responseId);
+    this.routeService.activateResponse(portId, routeId, responseId);
     return _.cloneDeep(this.stateManager.getState());
   }
 
   deactivateResponse(portId: string, routeId: string, responseId: string) {
-    this.responseService.deactivateResponse(portId, routeId, responseId);
+    this.routeService.deactivateResponse(portId, routeId, responseId);
     return _.cloneDeep(this.stateManager.getState());
   }
 

@@ -38,4 +38,21 @@ export class RouteService {
   deactivateRoute(portId: string, routeId: string) {
     this.stateManager.deactivateRoute(portId, routeId);
   }
+
+  activateResponse(portId: string, routeId: string, responseId: string) {
+    const route: IRoute = this.stateManager.getRoute(portId, routeId);
+    route.responses.forEach((response) => {
+      if(response.id !== responseId) {
+        response.active = true;
+      }
+      else {
+        response.active = true;
+      }
+    })
+  }
+
+  deactivateResponse(portId: string, routeId: string, responseId: string) {
+    const route: IRoute = this.stateManager.getRoute(portId, routeId);
+    route.responses.find(response => response.id === responseId).active = false;
+  }
 }
