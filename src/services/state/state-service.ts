@@ -69,7 +69,7 @@ export class StateService {
 
   createRoutes(portId: string, inputRoute: IRoute) {
     this.activityManager.stopActivities();
-    return this.routeService.createRoute(portId, inputRoute);
+    this.routeService.createRoute(portId, inputRoute);
     this.activityManager.startActivities();
   }
 
@@ -83,34 +83,18 @@ export class StateService {
 
   updateRoute(portId: string, routeId: string, route: IRoute) {
     this.activityManager.stopActivities();
-    return this.routeService.update(portId, routeId, route);
+    this.routeService.update(portId, routeId, route);
     this.activityManager.startActivities();
   }
 
   removeRoute(portId: string, routeId: string) {
     this.activityManager.stopActivities();
-    return this.routeService.remove(portId, routeId);
+    this.routeService.remove(portId, routeId);
     this.activityManager.startActivities();
   }
 
   getResponse(portId: string, routeId: string, responseId: string): IResponse {
-    const port: IPort = this.getPort(portId);
-
-    if(!port) {
-      const errorMsg = `port with id ${portId} does not exist`;
-      this.logger.error(errorMsg);
-      throw errorMsg;
-    }
-
-    const route: IRoute = port.routes.find((route) => route.id === routeId);
-
-    if(!route) {
-      const errorMsg = `route with id ${routeId} does not exist`;
-      this.logger.error(errorMsg);
-      throw errorMsg;
-    }
-
-    return route.responses.find((response) => response.id === responseId);
+    return this.responseService.get(portId, routeId, responseId);
   }
 
   createResponse(portId: string, routeId: string, response: IResponse) {
@@ -121,15 +105,13 @@ export class StateService {
 
   updateResponse(portId: string, routeId: string, responseId: string, newResponse: IResponse) {
     this.activityManager.stopActivities();
-    Object.assign(this.getResponse(portId, routeId, responseId), newResponse);
+    this.responseService.update(portId, routeId, responseId, newResponse);
     this.activityManager.startActivities();
   }
 
   removeResponse(portId: string, routeId: string, responseId: string) {
     this.activityManager.stopActivities();
-    const route: IRoute = this.getRoute(portId, routeId);
-    const responseIndex: number = route.responses.findIndex((response: IResponse) => response.id === responseId);
-    route.responses.splice(responseIndex, 1);
+    this.responseService.remove(portId, routeId, responseId);
     this.activityManager.startActivities();
   }
 }
