@@ -6,7 +6,6 @@ import {StateManager} from '../state-manager/state-manager';
 import {IResponse} from '../state-manager/response.model';
 import {Server} from 'http';
 import {IPort} from '../state-manager/port.model';
-import App = Electron.App;
 
 export class ActivityManager {
   private static instance: ActivityManager;
