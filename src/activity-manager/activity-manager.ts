@@ -44,6 +44,15 @@ export class ActivityManager {
               });
             });
         }
+
+        if (port.proxy) {
+          this.logger.info(`proxing ${port.name} on ${port.number}`);
+          ['get', 'post', 'put', 'delete', 'options'].forEach((method) => {
+            (<any>router)[method]('*', (req: Request, res: Response) => {
+              request(port.proxy.url + req.url).pipe(res);
+            });
+          })
+        }
       });
   }
 
@@ -60,13 +69,6 @@ export class ActivityManager {
     if (!this.appsMap.has(port.number)) {
       const app = express();
       this.appsMap.set(port.number, app);
-
-      if (port.proxy) {
-        app.use((req: Request, res: Response) => {
-          this.logger.info(`proxing ${port.name} on ${port.number}`);
-          request(port.proxy.url + req.url).pipe(res);
-        });
-      }
     }
 
     const app = this.appsMap.get(port.number);
