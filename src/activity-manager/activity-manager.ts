@@ -44,7 +44,7 @@ export class ActivityManager {
         if (port.proxy) {
           app.use((req: Request, res: Response) => {
             this.logger.info(`proxing ${port.name} on ${port.number}`);
-            request(port.proxy.url).pipe(res);
+            request(port.proxy.url + req.url).pipe(res);
           });
         }
       });
