@@ -1,16 +1,19 @@
 import * as express from 'express';
-import {Request, Response} from 'express';
+import {Application, Request, Response, NextFunction, Router} from 'express';
 import * as request from 'request';
 import * as winston from 'winston';
 import {StateManager} from '../state-manager/state-manager';
 import {IResponse} from '../state-manager/response.model';
 import {Server} from 'http';
 import {IPort} from '../state-manager/port.model';
+import App = Electron.App;
 
 export class ActivityManager {
   private static instance: ActivityManager;
   private readonly stateManager = StateManager.getInstance();
   private readonly listeners: Server[] = [];
+  private readonly appsMap: Map<number, Application> = new Map();
+  private readonly routesMap: Map<number, Router> = new Map();
   private readonly logger: winston.Winston = winston;
 
   public static getInstance() {
@@ -22,7 +25,9 @@ export class ActivityManager {
     state.ports
       .filter(port => port.active)
       .forEach((port) => {
-        const app = this.createListener(port);
+        this.createListener(port);
+        const router = express.Router();
+        this.routesMap.set(port.number, router);
 
         if (port.routes) {
           port.routes.filter(router => router.active)
@@ -35,17 +40,10 @@ export class ActivityManager {
             })
             .forEach((route) => {
               const regexPath = new RegExp(route.path);
-              (<any>app)[route.method.toLowerCase()](regexPath, (req: Request, res: Response) => {
+              (<any>router)[route.method.toLowerCase()](regexPath, (req: Request, res: Response) => {
                 this.handleResponse(route.responses, req, res);
               });
             });
-        }
-
-        if (port.proxy) {
-          app.use((req: Request, res: Response) => {
-            this.logger.info(`proxing ${port.name} on ${port.number}`);
-            request(port.proxy.url + req.url).pipe(res);
-          });
         }
       });
   }
@@ -59,14 +57,32 @@ export class ActivityManager {
     this.logger.info('closing all listening ports..');
   }
 
-  private createListener(port: IPort): express.Application {
-    const app: express.Application = express();
+  private createListener(port: IPort): Application {
+    if (!this.appsMap.has(port.number)) {
+      const app = express();
+      this.appsMap.set(port.number, app);
+
+      if (port.proxy) {
+        app.use((req: Request, res: Response) => {
+          this.logger.info(`proxing ${port.name} on ${port.number}`);
+          request(port.proxy.url + req.url).pipe(res);
+        });
+      }
+    }
+
+    const app = this.appsMap.get(port.number);
+
+    app.use((req: Request, res: Response, next: NextFunction) => {
+      const router = this.routesMap.get(port.number);
+      router(req, res, next);
+    });
+
     const listener = app.listen(port.number, () => {
       this.logger.info(`start listening ${port.name} on ${port.number}`);
     });
 
     this.listeners.push(listener);
-    return app;
+    return this.appsMap.get(port.number);
   }
 
   private handleResponse(responses: IResponse[], req: Request, res: Response) {
