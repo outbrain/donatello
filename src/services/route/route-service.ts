@@ -41,14 +41,7 @@ export class RouteService {
 
   activateResponse(portId: string, routeId: string, responseId: string) {
     const route: IRoute = this.stateManager.getRoute(portId, routeId);
-    route.responses.forEach((response) => {
-      if(response.id !== responseId) {
-        response.active = true;
-      }
-      else {
-        response.active = true;
-      }
-    })
+    route.responses.forEach((response) => response.active = response.id === responseId);
   }
 
   deactivateResponse(portId: string, routeId: string, responseId: string) {

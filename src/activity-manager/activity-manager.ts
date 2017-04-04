@@ -25,12 +25,20 @@ export class ActivityManager {
         const app = this.createListener(port);
 
         if (port.routes) {
-          port.routes.filter(router => router.active).forEach((route) => {
-            const regexPath = new RegExp(route.path);
-            (<any>app)[route.method.toLowerCase()](regexPath, (req: Request, res: Response) => {
-              this.handleResponse(route.responses, req, res);
+          port.routes.filter(router => router.active)
+            .sort((item1, item2) => {
+              if (item1.path < item2.path)
+                return 1;
+              if (item1.path > item2.path)
+                return -1;
+              return 0;
+            })
+            .forEach((route) => {
+              const regexPath = new RegExp(route.path);
+              (<any>app)[route.method.toLowerCase()](regexPath, (req: Request, res: Response) => {
+                this.handleResponse(route.responses, req, res);
+              });
             });
-          });
         }
 
         if (port.proxy) {
