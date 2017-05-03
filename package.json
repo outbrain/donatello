@@ -1,5 +1,5 @@
 {
-  "name": "donatello",
+  "name": "donatello-mock",
   "version": "0.0.1",
   "description": "Mock server",
   "main": "dist/main.js",
