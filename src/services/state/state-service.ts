@@ -26,7 +26,7 @@ export class StateService {
     currentState.ports = [];
 
     state.ports.forEach((port: IPort) => {
-      this.portService.create(_.cloneDeep(port))
+      this.portService.create(_.cloneDeep(port));
     });
 
     this.activityManager.startActivities();

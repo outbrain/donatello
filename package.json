@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "compile": "rm -rf dist && tsc --watch",
+    "release": "npm run lint && rm -rf dist && tsc",
     "serve": "nodemon dist/server.js  --watch dist"
   },
   "repository": {

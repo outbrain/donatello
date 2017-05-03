@@ -51,7 +51,7 @@ export class ActivityManager {
             (<any>router)[method]('*', (req: Request, res: Response) => {
               request(port.proxy.url + req.url).pipe(res);
             });
-          })
+          });
         }
       });
   }
