@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/outbrain/donatello.git"
   },
-  "author": "outbrain/engage",
-  "license": "Apache-2.0",
+  "author": "outbrain",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/outbrain/donatello/issues"
   },
