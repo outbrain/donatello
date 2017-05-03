@@ -1,12 +1,12 @@
 {
-  "name": "donatello-mock",
+  "name": "donatello-core",
   "version": "0.0.1",
   "description": "Mock server",
   "main": "dist/main.js",
   "scripts": {
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "compile": "rm -rf dist && tsc --watch",
-    "release": "npm run lint && rm -rf dist && tsc",
+    "release": "npm run lint && rm -rf dist && tsc && npm publish",
     "serve": "nodemon dist/server.js  --watch dist"
   },
   "repository": {
